@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Bulb Management - Implement</title>
+    <style>
+        /* CSS để trình bày giao diện */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .lightbulb {
+            display: inline-block;
+            width: 100px;
+            height: 150px;
+            background-color: gray;
+            border-radius: 50px;
+            box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+        .on {
+            background-color: yellow;
+            box-shadow: 0px 0px 20px 5px yellow;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        input[type=range] {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Light Bulb Manager - Implement</h1>
+    
+    <!-- Bóng đèn -->
+    <div class="lightbulb" id="lightbulb"></div>
+    
+    <!-- Nút bật/tắt -->
+    <div class="controls">
+        <button onclick="toggleLight()">Bật/Tắt đèn</button>
+    </div>
+    
+    <!-- Điều chỉnh độ sáng -->
+    <div class="controls">
+        <label for="brightness">Độ sáng:</label>
+        <input type="range" id="brightness" min="0" max="100" value="100" oninput="adjustBrightness()">
+    </div>
+
+    <!-- Đổi màu -->
+    <div class="controls">
+        <label for="color">Chọn màu:</label>
+        <input type="color" id="color" value="#FFFF00" onchange="changeColor()">
+    </div>
+
+    <!-- Hẹn giờ bật/tắt -->
+    <div class="controls">
+        <label for="timer">Hẹn giờ tắt (giây):</label>
+        <input type="number" id="timer" min="1" max="60" value="10">
+        <button onclick="setTimer()">Hẹn giờ</button>
+    </div>
+
+    <script>
+        let isOn = false;
+        const lightbulb = document.getElementById('lightbulb');
+
+        // Bật/Tắt bóng đèn
+        function toggleLight() {
+            isOn = !isOn;
+            if (isOn) {
+                lightbulb.classList.add('on');
+            } else {
+                lightbulb.classList.remove('on');
+            }
+        }
+
+        // Điều chỉnh độ sáng
+        function adjustBrightness() {
+            const brightness = document.getElementById('brightness').value;
+            lightbulb.style.opacity = brightness / 100;
+        }
+
+        // Đổi màu bóng đèn
+        function changeColor() {
+            const color = document.getElementById('color').value;
+            if (isOn) {
+                lightbulb.style.backgroundColor = color;
+                lightbulb.style.boxShadow = `0px 0px 20px 5px ${color}`;
+            }
+        }
+
+        // Hẹn giờ tắt bóng đèn
+        function setTimer() {
+            const time = document.getElementById('timer').value;
+            setTimeout(() => {
+                isOn = false;
+                lightbulb.classList.remove('on');
+            }, time * 1000);
+        }
+  	   <a href="C:\Users\ADMIN\OneDrive - st.hcmuaf.edu.vn\Desktop\Index.html" class="btn-back">Quay lại</a>
+    </div>
+</body>
+</html>
